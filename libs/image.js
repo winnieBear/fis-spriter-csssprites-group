@@ -142,6 +142,15 @@ Generator.prototype = {
         image_file.setContent(image.encode('png'));
         fis.compile(image_file);
         this.ret.pkg[pkg_path] = image_file;
+	
+        // 记录这些图片已经被打包到其他文件上了。
+        var images = this.images;
+        images && Object.keys(images).forEach(function(key) {
+          var image = images[key];
+          var map = image.map = image.map || {};
+          map.pkg = image_file.getId();
+        });
+	
 
         function unique(arr) {
             var map = {};
