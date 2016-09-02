@@ -88,13 +88,17 @@ Generator.prototype = {
 	        var scale_ = bg.size[0] / image_.size().width;
 
 	        // contain自适应
-	        // console.log(bg.size[0]);
 	        if(bg.size[0]==0){
 	        	scale_ = 1;
 	        	that.units = bg.units;
 	        }
 	        if (bg.size[0] != -1 && scale_ != that.settings.scale) {
-	            scale_ = '' + scale_;
+	            if(bg.units=='rem') {
+	            	scale_ = '1';
+	            }else{
+	            	scale_ = '' + scale_;
+	            }
+	        	that.units = bg.units;
 	            //不支持x, y
 	            if (direct === 'z') {
 	                if (scales[scale_]) {
