@@ -51,6 +51,55 @@ fis.config.set('settings.spriter.csssprites-group', {
     //合并图片存到/img/
     to: '/img'
 });
+
+fis
+.match('vue/*.css', {
+	// 这里的spriteTo为最高优先匹配，会覆盖全局的to设置
+	spriteTo : 'img/pkg'
+})
 ```
 
 > `to` 参数可以为相对路径（相对当前css路径）、绝对路径（项目根路径）
+
+> `spriteTo` 作为文件的to设置，为最高优先匹配，与`to`一样支持相对、绝对路径
+
+### rem自动识别
+目前支持在特有情况下自动识别rem，并根据settings.rem转换单位
+
+* 当background-size使用rem为单位时，如下：
+
+```css
+.icon {
+	background: url('img/icon.png?__sprite') no-repeat;
+	background-size: .5rem .5rem;
+}
+```
+
+* 当background-size:contain时、且windth、height使用rem作为单位，如下：
+
+```css
+.icon {
+	display: inline-block;
+	width: .5rem;
+	height: .5rem;
+	background: url('img/icon.png?__sprite') no-repeat;
+	background-size: contain;
+}
+```
+
+> 以上两个例子是等价的，都会使用rem作为单位处理
+
+对于层叠的样式，因为条件复杂，无法正确识别上下文，所以不支持组合的样式background-size:contain匹配rem，如下：
+
+```css
+.icon {
+	display: inline-block;
+	width: .5rem;
+	height: .5rem;
+}
+.icon-1 {
+	background: url('img/icon.png?__sprite') no-repeat;
+	background-size: contain;
+}
+```
+> 这种情况是无法识别成功的
