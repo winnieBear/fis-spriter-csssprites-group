@@ -27,7 +27,7 @@ var Rules = Object.derive(function (id, css) {
     self.repeat = false;
     self.color = false;
     self.size = [-1, -1];
-    self.units = 'px';
+    self.units = '';
 
     self._position = [0, 0];
     //image has __sprite query ?

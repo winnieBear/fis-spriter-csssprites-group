@@ -51,7 +51,7 @@ function Generator(file, index, list, images, ret, settings, opt) {
     this.images = images;
     this.index = index;
     this.rem = settings.rem || 1;
-    this.units = "px";
+    this.units = settings.rem ? "rem" : "px";
 
     fis.util.map(list, function (group, glist) {
         that.create(group, glist);
@@ -90,7 +90,7 @@ Generator.prototype = {
 	        // contain自适应
 	        if(bg.size[0]==0){
 	        	scale_ = 1;
-	        	that.units = bg.units;
+	        	if(bg.units) that.units = bg.units;
 	        }
 	        if (bg.size[0] != -1 && scale_ != that.settings.scale) {
 	            if(bg.units=='rem') {
@@ -98,7 +98,7 @@ Generator.prototype = {
 	            }else{
 	            	scale_ = '' + scale_;
 	            }
-	        	that.units = bg.units;
+	        	if(bg.units) that.units = bg.units;
 	            //不支持x, y
 	            if (direct === 'z') {
 	                if (scales[scale_]) {
