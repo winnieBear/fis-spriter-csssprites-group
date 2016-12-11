@@ -140,7 +140,7 @@ var Rules = Object.derive(function (id, css) {
                     self.size[0] = parseFloat(res[1]);
                     self.size[1] = parseFloat(res[3]);
                     self.units = res[2];
-                }else if(size=='contain' && size) {
+                }else if(size.trim()=='contain') {
                 	res = css.match(__size_re);
                 	if(res) {
                 		self.units = _get_units(res);
