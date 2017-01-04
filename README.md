@@ -20,7 +20,7 @@
     </tr>
     <tr>
         <td>?__sprite=group</td>
-        <td>标识图片合并到"group_(x|y|z).png"</td>
+        <td>标识图片合并到"group_z.png"</td>
     </tr>
 </table>
 
@@ -44,6 +44,8 @@ fis.config.set('settings.spriter.csssprites-group', {
 	scale: 1,
 	//1rem像素值
 	rem: 50,
+	// 默认单位
+	unit: 'px',
     //图之间的边距
     margin: 10,
     //使用矩阵排列方式，默认为线性`linear`
@@ -59,14 +61,20 @@ fis
 })
 ```
 
-> `to` 参数可以为相对路径（相对当前css路径）、绝对路径（项目根路径）
+> `rem`： 若设置了，则默认使用`rem`作为单位
 
-> `spriteTo` 作为文件的to设置，为最高优先匹配，与`to`一样支持相对、绝对路径
+> `unit`： 可覆盖默认单位，不影响`background-size`识别的单位
 
-### rem自动识别
-目前支持在特有情况下自动识别rem，并根据settings.rem转换单位
+> `to`： 可以为相对路径（相对当前css路径）、绝对路径（项目根路径）
 
-* 当background-size使用rem为单位时，如下：
+> `spriteTo`： 作为文件的to设置，为最高优先匹配，与`to`一样支持相对、绝对路径
+
+
+### 单位自动识别
+目前支持在特有情况下自动识别单位，若为rem，则根据`settings.rem`转换单位
+此时忽略`settings.unit`设置，`background-size`**强制使用识别的单位**(`px`、`rem`)
+
+* 当有`background-size`时，如下：
 
 ```css
 .icon {
@@ -75,7 +83,7 @@ fis
 }
 ```
 
-* 当background-size:contain时、且windth、height使用rem作为单位，如下：
+* 当`background-size:contain`时、且存在`windth`、`height`，如下：
 
 ```css
 .icon {
@@ -89,7 +97,9 @@ fis
 
 > 以上两个例子是等价的，都会使用rem作为单位处理
 
-对于层叠的样式，因为条件复杂，无法正确识别上下文，所以不支持组合的样式background-size:contain匹配rem，如下：
+对于层叠的样式，因为条件复杂，无法正确识别上下文，所以不支持组合的样式`background-size:contain`匹配，如下：
+
+> 使用**clean-css**处理后的样式，部分相同的`width`、`height`等属性会被移位，所以会识别失败，建议减少使用`contain`匹配单位
 
 ```css
 .icon {
