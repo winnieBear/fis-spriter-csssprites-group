@@ -87,18 +87,13 @@ Generator.prototype = {
 
 	        var scale_ = bg.size[0] / image_.size().width;
 
-	        // contain自适应
-	        if(bg.size[0]==0){
-	        	scale_ = 1;
-	        	if(bg.units) that.units = bg.units;
-	        }
-	        if (bg.size[0] != -1 && scale_ != that.settings.scale) {
-	            if(bg.units=='rem') {
-	            	scale_ = '1';
-	            }else{
-	            	scale_ = '' + scale_;
-	            }
-	        	if(bg.units) that.units = bg.units;
+	        // rem为单位
+        	if(bg.units) that.units = bg.units;
+        	if(that.units=='rem') {
+        		scale_ = 1;
+        	}
+	        if ((that.units=='rem' || bg.size[0] != -1) && scale_ != that.settings.scale) {
+            	scale_ = '' + scale_;
 	            //不支持x, y
 	            if (direct === 'z') {
 	                if (scales[scale_]) {
