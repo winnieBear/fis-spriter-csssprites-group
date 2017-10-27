@@ -3,6 +3,37 @@
 基于[fis-spriter-csssprites-group](https://github.com/mudoo/fis-spriter-csssprites-group) 以及FIS的[fis-spriter-csssprites](https://github.com/fex-team/fis-spriter-csssprites)，基于fis-spriter-csssprites-group修改而来。
 修改的目的是为了解决不同分组的图片缩放比例可能不同，有的分组是1x图，有的分组是2x图，不同分组合并时缩放比例单独处理。
 
+### scale配置方法
+
+````
+// fis.conf配置
+fis
+  .match('::package', {
+    spriter: fis.plugin('csssprites-dj', {
+        margin: 10,
+        layout: 'matrix',
+        unit: 'px',
+        to: './img'
+    }),
+    ...
+  })
+
+// css 中配置
+// 图片链接后面跟?,添加参数scale=xxx,xxx就是缩放比
+
+    li.list-1::before {
+      background-image: url('./img/a@2x.png?__sprite=w4_2x&scale=0.5');
+    }
+    li.list-2::before {
+      background-image: url('./img/b@2x.png?__sprite=w4_2x&scale=0.5');
+    }
+    li.list-3::before {
+      background-image: url('./img/c@2x.png?__sprite=w4_2x&scale=0.5');
+    }
+
+````
+
+
 具体说明请访问原项目了解
 
 ### 特性
