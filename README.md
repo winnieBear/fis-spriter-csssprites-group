@@ -1,4 +1,4 @@
-# fis-spriter-csssprites
+# fis-spriter-csssprites-dj
 
 基于[fis-spriter-csssprites-group](https://github.com/mudoo/fis-spriter-csssprites-group) 以及FIS的[fis-spriter-csssprites](https://github.com/fex-team/fis-spriter-csssprites)，基于fis-spriter-csssprites-group修改而来。
 修改的目的是为了解决不同分组的图片缩放比例可能不同，有的分组是1x图，有的分组是2x图，不同分组合并时缩放比例单独处理。
