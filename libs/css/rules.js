@@ -17,7 +17,7 @@ var Rules = Object.derive(function (id, css) {
         , __support_size_re = /([\d\.]+)(px|rem)\s*([\d\.]+)(px|rem)/i //支持px、rem
         , __color_re = /((?:^|\s)#[0-9a-fA-F]{6}|#[0-9a-fA-F]{3}|\btransparent|\b(?:rgba?|hsla?)\([\s\S]*?\))/i
         , __repeat_re = /\brepeat-(x|y)/i
-        , __sprites_re = /([?&])__sprite=?([a-z0-9_-]+)?(&)?/i  // 支持分组合并，多参数
+        , __sprites_re = /([?&])__sprite=?([a-z0-9_-]+)?(?:&scale=([\d\.]+))?(&)?/i  // 支持分组合并，多参数，支持缩放
         , __sprites_hook_ld = '<<<'
         , __sprites_hook_rd = '>>>';
     //selectors
@@ -93,6 +93,7 @@ var Rules = Object.derive(function (id, css) {
                     // 图片分组合并支持
                     self.image = info.origin.replace(__sprites_re, function (value, first, group, last) {
                         self._group = group ? group : '__default__';
+                      self._scale = scale ? scale : 1.0;
                         if (first === '?') {
                             if (last === '&') {
                                 return first;
@@ -193,6 +194,9 @@ var Rules = Object.derive(function (id, css) {
     },
     getGroup: function() {
         return this._group;
+    },
+    getScale: function () {
+      return this._scale;
     },
     getDirect: function() {
         return this._direct;

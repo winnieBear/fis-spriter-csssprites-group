@@ -82,6 +82,7 @@ Generator.prototype = {
 	    fis.util.map(list, function (k, bg) {
 	        var image_ = Image(getImage(bg.getImageUrl()).getContent());
 	        var direct = bg.getDirect();
+          var imgScale = bg.getScale();
 
 	        bg.image_ = image_;
 
@@ -92,8 +93,13 @@ Generator.prototype = {
         	if(that.units=='rem') {
         		scale_ = 1;
         	}
-	        if ((that.units=='rem' || bg.size[0] != -1) && scale_ != that.settings.scale) {
-            	scale_ = '' + scale_;
+          if (((that.units == 'rem' || bg.size[ 0 ] != -1) && scale_ != that.settings.scale)
+            || (imgScale != 1.0)) {
+              if (imgScale != 1.0) {
+                scale_ = '' + imgScale;
+              } else {
+                scale_ = '' + scale_;
+              }
 	            //不支持x, y
 	            if (direct === 'z') {
 	                if (scales[scale_]) {
@@ -148,7 +154,7 @@ Generator.prototype = {
         image_file.setContent(image.encode('png'));
         fis.compile(image_file);
         this.ret.pkg[pkg_path] = image_file;
-	
+
         // 记录这些图片已经被打包到其他文件上了。
         var images = this.images;
         images && Object.keys(images).forEach(function(key) {
@@ -156,7 +162,7 @@ Generator.prototype = {
           var map = image.map = image.map || {};
           map.pkg = image_file.getId();
         });
-	
+
 
         // 记录这些图片已经被打包到其他文件上了。
         var images = this.images;

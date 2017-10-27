@@ -1,12 +1,15 @@
 # fis-spriter-csssprites
 
-基于FIS的csssprites，由[fis-spriter-csssprites](https://github.com/fex-team/fis-spriter-csssprites) 修改而来，具体说明请访问原项目了解
+基于[fis-spriter-csssprites-group](https://github.com/mudoo/fis-spriter-csssprites-group) 以及FIS的[fis-spriter-csssprites](https://github.com/fex-team/fis-spriter-csssprites)，基于fis-spriter-csssprites-group修改而来。
+修改的目的是为了解决不同分组的图片缩放比例可能不同，有的分组是1x图，有的分组是2x图，不同分组合并时缩放比例单独处理。
+
+具体说明请访问原项目了解
 
 ### 特性
-在官方基础上，添加支持图片分组合并、@media处理、合并路径指定、rem支持  
+在官方基础上，添加支持图片分组合并、@media处理、合并路径指定、rem支持
 
 ####@media处理
-样式中存在的媒体查询，往往是需要做响应式兼容，大多数情况下需要跟其他图片分开处理，如retina处理。  
+样式中存在的媒体查询，往往是需要做响应式兼容，大多数情况下需要跟其他图片分开处理，如retina处理。
 所以，将**@media**当作单独的一部分样式处理，生成的css也写入到@media中，完美解决原先合并处理后生成的样式混乱问题。
 
 <table>
