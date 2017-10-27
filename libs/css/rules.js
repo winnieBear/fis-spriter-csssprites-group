@@ -91,9 +91,9 @@ var Rules = Object.derive(function (id, css) {
                     info = _.stringQuote(res[1]);
                     info = _.query(info.rest);
                     // 图片分组合并支持
-                    self.image = info.origin.replace(__sprites_re, function (value, first, group, last) {
+                    self.image = info.origin.replace(__sprites_re, function (value, first, group, scale, last){
                         self._group = group ? group : '__default__';
-                      self._scale = scale ? scale : 1.0;
+                        self._scale = scale ? scale : 1.0;
                         if (first === '?') {
                             if (last === '&') {
                                 return first;
