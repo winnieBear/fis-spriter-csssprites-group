@@ -157,15 +157,6 @@ Generator.prototype = {
 
         // 记录这些图片已经被打包到其他文件上了。
         var images = this.images;
-        images && Object.keys(images).forEach(function(key) {
-          var image = images[key];
-          var map = image.map = image.map || {};
-          map.pkg = image_file.getId();
-        });
-
-
-        // 记录这些图片已经被打包到其他文件上了。
-        var images = this.images;
         list.forEach(function(item) {
             var image = images[item.image],
             	map = image.map = image.map || {};
